@@ -21,12 +21,37 @@ remove_motd() {
   sleep 2
 }
 
+update_apt() {
+  write_msg "Atualizando Pacotes do Termux com Apt..."
+  apt update && apt upgrade -y 
+
+  if [[ $? -ne 0 ]]; then
+     write_msg "Erro: Não Foi Possível Atualizar os Pacotes. Verifique sua Internet"
+     exit 1
+  fi
+
+  write_msg "Pacotes Atualizados com Sucesso!"
+  sleep 2
+}
+
+update_pkg() {
+  write_msg "Atualizando Pacotes do Termux com pkg..."
+  pkg update && pkg upgrade -y
+
+  if [[ $? -ne 0 ]]; then
+     write_msg "Erro: Não Foi Possível Atualizar os Pacotes. Verifique sua Internet"
+     exit 1
+  fi
+
+  write_msg "Pacotes Atualizados com Sucesso!"
+}
+
 main() {
   write_msg "Inicializando Customização no Termux..."
   sleep 2
   remove_motd
+  update_apt
+  update_pkg
 }
 
 main
-
-
