@@ -5,13 +5,14 @@ write_msg() {
 }
 
 remove_motd() {
+  local dir_motd="/data/data/com.termux/files/usr/etc"
+
   write_msg "Removendo Mensagens de Boas vindas do Termux.. "
-  cd  ~/../usr/etc
-  if [[ $? -ne 0 ]]; then
-     write_msg "Erro: Não foi possivel Acessar o diretório /usr/etc."
-     exit 1
-  fi
-  rm -f motd*
+
+  cd  ~/../usr/etc || { write _msg "Erro: Não foi possível Acessar o Diretório /usr/etc"; exit 1;}
+
+  rm -f "$dir_motd/motd"* 2>/dev/null
+
   if [[ $? -ne 0 ]]; then
      write_msg "Erro: Não Foi Possível Remover os Arquivos Motd"
      exit 1
