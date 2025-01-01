@@ -46,12 +46,32 @@ update_pkg() {
   write_msg "Pacotes Atualizados com Sucesso!"
 }
 
+choose_mirror() {
+  sleep 2
+  write_msg "-------------"
+  write_msg "Você irá escolher o mirror que mais te serve.."
+  write_msg "-------------"
+  sleep 2
+  for i in {1..5}; do
+    write_msg $i
+    sleep 2
+  done
+
+  termux-change-repo
+  if [[ $? -ne 0 ]]; then
+     write_msg "Erro: Não Foi Possivel Realizar a Troca do Mirror. Tente Novamente!"
+     exit 1
+  fi
+  write_msg "Mirror Selecionado com Sucesso!"
+}
+
 main() {
   write_msg "Inicializando Customização no Termux..."
   sleep 2
   remove_motd
   update_apt
   update_pkg
+  choose_mirror
 }
 
 main
