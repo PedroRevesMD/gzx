@@ -65,12 +65,16 @@ choose_mirror() {
   write_msg "Mirror Selecionado com Sucesso!"
 }
 
+update_packages() {
+  update_apt
+  update_pkg
+}
+
 main() {
   write_msg "Inicializando Customização no Termux..."
   sleep 2
   remove_motd
-  update_apt
-  update_pkg
+  update_packages
   choose_mirror
 }
 
