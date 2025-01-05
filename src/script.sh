@@ -23,7 +23,7 @@ remove_motd() {
 
 update_apt() {
   write_msg "Atualizando Pacotes do Termux com Apt..."
-  apt update && apt upgrade -y 
+  apt update && apt upgrade -y
 
   if [[ $? -ne 0 ]]; then
      write_msg "Erro: Não Foi Possível Atualizar os Pacotes. Verifique sua Internet"
@@ -58,6 +58,7 @@ choose_mirror() {
   done
 
   termux-change-repo
+
   if [[ $? -ne 0 ]]; then
      write_msg "Erro: Não Foi Possivel Realizar a Troca do Mirror. Tente Novamente!"
      exit 1
@@ -70,12 +71,57 @@ update_packages() {
   update_pkg
 }
 
+check_valid_email() {
+  email=$1
+
+  if [ -z "$email" ];
+  then
+    return 1
+  elif [[ "$email" =~ ^[[:alnum:]._%+-]+@[[:alnum:].-]+\.[a-zA-Z]{2,}$ ]]
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+config_git() {
+  write_msg "Iremos dar Inicio a configuracao do git..."
+  sleep 1.5
+  write_msg "Digite seu email de preferência..."
+  while true
+  do
+    read -p "Email:" user_email
+    if check_valid_email "$user_email";
+    then
+      git config --global user.email "$user_email"
+      write_msg "Git Email configurado com Sucesso!"
+      break
+    else
+      write_msg "Email Invalido, Tente Novamente."
+    fi
+  done
+  while true
+  do
+    read -p "Username:" username
+    if [ -z "$username" ];
+    then
+      write_msg "User Invalido, Tente Novamente."
+    else
+      git config --global user.name "$username"
+      write_msg "Git User configurado com Sucesso!"
+      break
+    fi
+  done
+}
+
 main() {
   write_msg "Inicializando Customização no Termux..."
   sleep 2
   remove_motd
   update_packages
   choose_mirror
+  config_git
 }
 
 main
