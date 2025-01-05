@@ -134,9 +134,10 @@ main() {
   sleep 2
   remove_motd
   update_packages
+  install_tools
   choose_mirror
   config_git
-  install_tools
+  write_msg "Customização Concluída com Sucesso!"
 }
 
 main
