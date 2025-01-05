@@ -11,7 +11,7 @@ Para utilizar esse script, é necessário que você tenha
 instalado as versões recentes do termux. Com isso, copie
 e cole o link abaixo em seu termux:
 
-`curl -sSL -o gzx https://github.com PedroRevesMD/gzx/releases/download/1.0.0/script.sh`
+`curl -sSL -o gzx https://github.com/PedroRevesMD/gzx/releases/download/1.0.0/script.sh`
 
 `chmod +x gzx`
 
