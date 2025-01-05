@@ -115,6 +115,18 @@ config_git() {
   done
 }
 
+install_tools() {
+  write_msg "Instalando Ferramentas Basicas (Python3, Gcc, wget, neovim "
+
+  if ! pkg i clang python3 neovim wget;
+  then
+    write_msg "Não foi possivel instalar as ferramentas. Tente novamente..."
+    exit 1
+  else
+    write_msg "Instalacão Concluída com Sucesso!"
+  fi
+}
+
 main() {
   write_msg "Inicializando Customização no Termux..."
   sleep 2
@@ -122,6 +134,7 @@ main() {
   update_packages
   choose_mirror
   config_git
+  install_tools
 }
 
 main
