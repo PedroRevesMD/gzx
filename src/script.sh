@@ -89,7 +89,8 @@ config_git() {
   write_msg "Iremos dar Inicio a configuracao do git..."
   sleep 1.5
   write_msg "Digite seu email de preferência..."
-  while true
+
+  while true;
   do
     read -p "Email:" user_email
     if check_valid_email "$user_email";
@@ -101,7 +102,8 @@ config_git() {
       write_msg "Email Invalido, Tente Novamente."
     fi
   done
-  while true
+
+  while true;
   do
     read -p "Username:" username
     if [ -z "$username" ];
