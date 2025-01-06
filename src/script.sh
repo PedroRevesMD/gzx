@@ -120,7 +120,7 @@ config_git() {
 install_tools() {
   write_msg "Instalando Ferramentas Basicas (Python3, Gcc, wget, neovim "
 
-  if ! pkg i clang python3 neovim wget git;
+  if ! pkg i clang python3 neovim wget git glow -y;
   then
     write_msg "Não foi possivel instalar as ferramentas. Tente novamente..."
     exit 1
